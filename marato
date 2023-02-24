@@ -17,7 +17,6 @@ struct nodos
  int val = 0;
  nodos *sig,*ok;
 };
-
  nodos *cab, *aux, *aux2;
 
 float c = 1;
@@ -64,9 +63,7 @@ do
     {
      cout<<"El tiempo del corredor debe ser mayor";
          return;
-     }else  if ((aux->entrada.v) > tiempo)
-
-     {
+     }
  aux->sig = NULL;
  aux2 = aux = NULL;
 
