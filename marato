@@ -73,7 +73,6 @@ do
     }
 
 
- } 
 
 }while (c<can);
 
