@@ -36,10 +36,10 @@ do
  {
 
   cab = (struct nodos *) malloc(sizeof(struct nodos));
-  cout<<"ingrese el nombre: ";
+  cout<<"ingrese el nombre del corredor: ";
   cin>>cab->entrada.n;
   cab->sig = NULL;
-  cout<<"ingrese el numero de documento: ";
+  cout<<"ingrese el tiempo del corredor: ";
   cin>>tiempo;
   cab->entrada.v = tiempo;
   cab->sig = NULL;
