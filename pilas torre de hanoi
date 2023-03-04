@@ -1,0 +1,402 @@
+#include <iostream>
+#include <malloc.h>
+#include <cstdlib>
+using namespace std;
+
+struct nodos
+{
+
+    int pila = 0;
+
+    nodos *sig;
+};
+
+nodos *cab, *aux;
+
+struct nodos2
+{
+
+    int pila2 = 0;
+
+    nodos2 *sig2;
+};
+
+nodos2 *cab2, *aux2;
+
+struct nodos3
+{
+
+    int pila3 = 0;
+
+    nodos3 *sig3;
+};
+
+nodos3 *cab3, *aux3;
+
+int regis()
+{
+    aux = (struct nodos *)malloc(sizeof(struct nodos));
+    cout << "ingrese el valor de pila:  ";
+    cin >> aux->pila;
+    if (cab == NULL)
+    {
+        cab = aux;
+        cab->sig = NULL;
+    }
+    else
+    {
+
+        aux->sig = cab;
+        cab = aux;
+    }
+
+    aux = NULL;
+    free(aux);
+    return 0;
+}
+
+int mostrar()
+{
+    aux = cab;
+
+    while (aux != NULL)
+    {
+        cout << "el valor es: ";
+        cout << aux->pila << endl;
+        aux = aux->sig;
+    }
+
+    return 0;
+}
+
+int borrar()
+{
+    if (cab != NULL)
+    {
+        aux = cab;
+        cab = cab->sig;
+        free(aux);
+    }
+
+    return 0;
+}
+
+int regis2()
+{
+    int t = 0, n = 0, m = 0;
+
+    aux = cab;
+    cout << "pila 1" << endl;
+    while (aux != NULL)
+    {
+        cout << aux->pila << endl;
+        t = cab->pila;
+        aux = aux->sig;
+    }
+
+    if (cab != NULL)
+    {
+        aux = cab;
+        cab = cab->sig;
+
+        free(aux);
+    }
+
+    aux3 = (struct nodos3 *)malloc(sizeof(struct nodos3));
+    aux3->pila3 = t;
+
+    if (cab3 == NULL)
+    {
+        cab3 = aux3;
+        cab3->sig3 = NULL;
+    }
+    else
+    {
+
+        aux3->sig3 = cab3;
+        cab3 = aux3;
+    }
+
+    aux3 = cab3;
+    cout << "pila 3" << endl;
+    while (aux3 != NULL)
+    {
+
+        cout << aux3->pila3 << endl;
+        aux3 = aux3->sig3;
+    }
+
+    aux = cab;
+    while (aux != NULL)
+    {
+        n = cab->pila;
+        aux = aux->sig;
+    }
+
+    if (cab != NULL)
+    {
+        aux = cab;
+        cab = cab->sig;
+
+        free(aux);
+    }
+
+    aux2 = (struct nodos2 *)malloc(sizeof(struct nodos2));
+    aux2->pila2 = n;
+
+    if (cab2 == NULL)
+    {
+        cab2 = aux2;
+        cab2->sig2 = NULL;
+    }
+    else
+    {
+
+        aux2->sig2 = cab2;
+        cab2 = aux2;
+    }
+
+    aux2 = cab2;
+    cout << "pila 2" << endl;
+    while (aux2 != NULL)
+    {
+
+        cout << aux2->pila2 << endl;
+        aux2 = aux2->sig2;
+    }
+
+    aux3 = cab3;
+    while (aux3 != NULL)
+    {
+        n = cab3->pila3;
+        aux3 = aux3->sig3;
+    }
+
+    if (cab3 != NULL)
+    {
+        aux3 = cab3;
+        cab3 = cab3->sig3;
+
+        free(aux3);
+    }
+    aux2 = (struct nodos2 *)malloc(sizeof(struct nodos2));
+    aux2->pila2 = n;
+
+    if (cab2 == NULL)
+    {
+        cab2 = aux2;
+        cab2->sig2 = NULL;
+    }
+    else
+    {
+
+        aux2->sig2 = cab2;
+        cab2 = aux2;
+    }
+
+    aux2 = cab2;
+    cout << "pila 2" << endl;
+    while (aux2 != NULL)
+    {
+
+        cout << aux2->pila2 << endl;
+        aux2 = aux2->sig2;
+    }
+
+    aux = cab;
+    while (aux != NULL)
+    {
+
+        m = cab->pila;
+        aux = aux->sig;
+    }
+
+    if (cab != NULL)
+    {
+        aux = cab;
+        cab = cab->sig;
+
+        free(aux);
+    }
+
+    aux3 = (struct nodos3 *)malloc(sizeof(struct nodos3));
+    aux3->pila3 = m;
+
+    if (cab3 == NULL)
+    {
+        cab3 = aux3;
+        cab3->sig3 = NULL;
+    }
+    else
+    {
+
+        aux3->sig3 = cab3;
+        cab3 = aux3;
+    }
+
+    aux3 = cab3;
+    cout << "pila 3" << endl;
+    while (aux3 != NULL)
+    {
+
+        cout << aux3->pila3 << endl;
+        aux3 = aux3->sig3;
+    }
+
+    aux2 = cab2;
+    while (aux2 != NULL)
+    {
+
+        n = cab2->pila2;
+        aux2 = aux2->sig2;
+    }
+
+    if (cab2 != NULL)
+    {
+        aux2 = cab2;
+        cab2 = cab2->sig2;
+
+        free(aux2);
+    }
+
+    aux = (struct nodos *)malloc(sizeof(struct nodos));
+    aux->pila = n;
+
+    if (cab == NULL)
+    {
+        cab = aux;
+        cab->sig = NULL;
+    }
+    else
+    {
+
+        aux->sig = cab;
+        cab = aux;
+    }
+
+    aux = cab;
+    cout << "pila 1" << endl;
+    while (aux != NULL)
+    {
+
+        cout << aux->pila << endl;
+        aux = aux->sig;
+    }
+
+    aux2 = cab2;
+    while (aux2 != NULL)
+    {
+
+        t = cab2->pila2;
+        aux2 = aux2->sig2;
+    }
+
+    if (cab2 != NULL)
+    {
+        aux2 = cab2;
+        cab2 = cab2->sig2;
+
+        free(aux2);
+    }
+    aux3 = (struct nodos3 *)malloc(sizeof(struct nodos3));
+    aux3->pila3 = t;
+
+    if (cab3 == NULL)
+    {
+        cab3 = aux3;
+        cab3->sig3 = NULL;
+    }
+    else
+    {
+
+        aux3->sig3 = cab3;
+        cab3 = aux3;
+    }
+
+    aux3 = cab3;
+    cout << "pila 3" << endl;
+    while (aux3 != NULL)
+    {
+
+        cout << aux3->pila3 << endl;
+        aux3 = aux3->sig3;
+    }
+
+    aux = cab;
+    while (aux != NULL)
+    {
+
+        t = cab->pila;
+        aux = aux->sig;
+    }
+
+    if (cab != NULL)
+    {
+        aux = cab;
+        cab = cab->sig;
+
+        free(aux);
+    }
+
+    aux3 = (struct nodos3 *)malloc(sizeof(struct nodos3));
+    aux3->pila3 = t;
+
+    if (cab3 == NULL)
+    {
+        cab3 = aux3;
+        cab3->sig3 = NULL;
+    }
+    else
+    {
+
+        aux3->sig3 = cab3;
+        cab3 = aux3;
+    }
+
+    aux3 = cab3;
+    cout << "pila 3" << endl;
+    while (aux3 != NULL)
+    {
+
+        cout << aux3->pila3 << endl;
+        aux3 = aux3->sig3;
+    }
+
+    return 0;
+}
+
+int main()
+{
+    int ops = 0;
+    do
+    {
+        cout << "\n";
+        cout << "menu" << endl;
+        cout << "1.Registrar" << endl;
+        cout << "2.mostrar" << endl;
+        cout << "3.borrar" << endl;
+        cout << "4.salir" << endl;
+        cin >> ops;
+        switch (ops)
+        {
+        case 1:
+            regis();
+            break;
+
+        case 2:
+            mostrar();
+            break;
+
+        case 3:
+            borrar();
+            break;
+        case 4:
+            regis2();
+            break;
+        default:
+            cout << "esta opcion no existe";
+            break;
+        }
+
+    } while (ops != 5);
+}
