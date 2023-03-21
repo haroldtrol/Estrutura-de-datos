@@ -1,1 +1,231 @@
+#include <iostream>
+#include <malloc.h>
+#include <cstdlib>
+
+using namespace std;
+   // Helmer David Riascos López
+    // Jr edward micolta obando
+    // Harold Ricardo Arroyo Bueno
+struct datos
+{
+    char n[10];
+    float v;
+};
+
+struct nodos
+{
+    struct datos entrada;
+    float pila = 0;
+    nodos *sig;
+};
+
+nodos *cab, *aux, *aux2, *pila, *aux3, *cab3;
+int array[50];
+char j;
+int can, p, i = 1, k = 0, x, vueltas = 0, g = 1;
+float promedio = 0, suma = 0, c = 1;
+void lista();
+void pilas();
+void inicio()
+
+{
+    cout << "¿cuantos vueltas hay en el maraton?: ";
+    cin >> vueltas;
+
+    if (vueltas > 1)
+    {
+        cout << "¿cuantos corredores hay en el maraton?: ";
+        cin >> can;
+        do
+        {
+
+            if (cab == NULL)
+            {
+
+                cab = (struct nodos *)malloc(sizeof(struct nodos));
+                cout << "ingrese el nombre: ";
+                cin >> cab->entrada.n;
+                cab->sig = NULL;
+                cout << "ingrese el numero de documento: ";
+                cin >> cab->entrada.v;
+                suma = cab->entrada.v;
+                cab->sig = NULL;
+            }
+            else
+            {
+                c++;
+                aux = (struct nodos *)malloc(sizeof(struct nodos));
+                cout << "ingrese el nombre: ";
+                cin >> aux->entrada.n;
+                aux->sig = NULL;
+                aux2 = cab;
+                while (aux2->sig != NULL)
+                    aux2 = aux2->sig;
+                aux2->sig = aux;
+
+                cout << "ingrese el tiempo del corredor ";
+                cin >> promedio;
+                aux->entrada.v = promedio;
+                suma = suma + promedio;
+                if (aux->entrada.v < cab->entrada.v)
+                {
+                    cout << "El tiempo del corredor debe ser mayor";
+                    return;
+                }
+                else
+                {
+                }
+
+                aux->sig = NULL;
+                aux2 = aux = NULL;
+
+                free(aux);
+                free(aux2);
+            }
+
+        } while (c < can);
+
+        lista();
+        suma = suma / c;
+        cout << "el promedio de los corredores es: " << suma << "\n";
+    }
+    else
+    {
+
+        cout << "¿cuantos corredores hay en el maraton?: ";
+        cin >> can;
+        do
+        {
+
+            if (cab == NULL)
+            {
+
+                cab = (struct nodos *)malloc(sizeof(struct nodos));
+                cout << "ingrese el nombre: ";
+                cin >> cab->entrada.n;
+                cab->sig = NULL;
+                cout << "ingrese el tiempo del corredor ";
+                cin >> cab->entrada.v;
+                suma = cab->entrada.v;
+                cab->sig = NULL;
+            }
+            else
+            {
+                c++;
+                aux = (struct nodos *)malloc(sizeof(struct nodos));
+                cout << "ingrese el nombre: ";
+                cin >> aux->entrada.n;
+                aux->sig = NULL;
+                aux2 = cab;
+                while (aux2->sig != NULL)
+                    aux2 = aux2->sig;
+                aux2->sig = aux;
+
+                cout << "ingrese el tiempo del corredor ";
+                cin >> promedio;
+                aux->entrada.v = promedio;
+                suma = suma + promedio;
+                if (aux->entrada.v < cab->entrada.v)
+                {
+                    cout << "El tiempo del corredor debe ser mayor";
+                    return;
+                }
+                else
+                {
+                }
+
+                aux->sig = NULL;
+                aux2 = aux = NULL;
+
+                free(aux);
+                free(aux2);
+            }
+
+        } while (c < can);
+        suma = suma / c;
+        }
+}
+
+void lista()
+{
+
+    while (g < vueltas)
+    {
+        i = 1;
+        aux = cab;
+        while (aux != NULL)
+        {
+
+            cout << "nombre del corredor " << aux->entrada.n << " numero del corredor" << i++ << " : ";
+            cin >> p;
+            aux->entrada.v = p + aux->entrada.v;
+            aux = aux->sig;
+        }
+        g++;
+    }
+    pilas();
+}
+
+void pilas()
+{
+
+    int h;
+    aux = cab;
+    while (aux != NULL)
+    {
+
+        aux3 = (struct nodos *)malloc(sizeof(struct nodos));
+        h = aux->entrada.v;
+        aux3->pila = h;
+        if (cab3 == NULL)
+        {
+            cab3 = aux3;
+            cab3->sig = NULL;
+        }
+        else
+        {
+
+            aux3->sig = cab3;
+            cab3 = aux3;
+        }
+        aux3 = NULL;
+        free(aux3);
+        aux = aux->sig;
+    }
+
+    aux3 = cab3;
+    cout << "promedio de los corredores fue de : " << endl;
+    while (aux3 != NULL)
+    {
+        aux3->pila = aux3->pila / vueltas;
+        array[x] = aux3->pila;
+        aux3 = aux3->sig;
+        x++;
+    }
+    // Ordenamiento de burbuja para organizar los números de menor a mayor
+    for (int j = 0; j < x - 1; j++)
+    {
+        for (int k = 0; k < x - j - 1; k++)
+        {
+            if (array[k] > array[k + 1])
+            {
+                int temp = array[k];
+                array[k] = array[k + 1];
+                array[k + 1] = temp;
+            }
+        }
+    }
+
+    for (int j = 0; j < x; j++)
+    {
+        cout << array[j] << endl;
+    }
+}
+void inicio();
+
+int main()
+{
+
+    inicio();
+}
 
