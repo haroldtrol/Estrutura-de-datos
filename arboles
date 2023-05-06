@@ -1,0 +1,183 @@
+#include<iostream>
+#include<stdlib.h>
+#include<malloc.h>
+using namespace std;
+struct pagoconsul{
+int pag=0;
+pagoconsul *pagiz;
+pagoconsul *pagoder;
+pagoconsul *sig;
+};
+struct paciente{
+    int anho=0;
+    paciente *izq;
+    paciente*der;
+    paciente*sig;
+};
+paciente *raiz,*aux, *aux2;
+pagoconsul *raizz, *auxx, *auxx2;
+int pocisionarconsulgen(){
+   if(auxx->pag<=auxx2->pag){
+    if(auxx2->pagiz!=NULL){
+        auxx2=auxx2->pagiz;
+        pocisionarconsulgen();
+    }else
+    auxx2->pagiz=auxx2;
+}else if(auxx->pag>=auxx2->pag){
+    if(auxx2->pagoder!=NULL){
+        auxx2=auxx2->pagoder;
+        pocisionarconsulgen();
+    }else
+    auxx2->pagoder=auxx;
+    }
+    return 0;
+} 
+int pocisionar(){
+if(aux->anho<aux2->anho){
+    if(aux2->izq!=NULL){
+        aux2=aux2->izq;
+        pocisionar();
+    }else
+    aux2->izq=aux;
+}else if(aux->anho>=aux2->anho){
+    if(aux2->der!=NULL){
+        aux2=aux2->der;
+        pocisionar();
+    }else
+    aux2->der=aux;
+    }
+    return 0;
+}
+int registrar_pagoconsulta(){
+int valor1=14800, valor2=30000,valor3=35000;
+    auxx = (struct pagoconsul*) malloc (sizeof(struct pagoconsul*));
+    auxx->pagoder=auxx->pagiz=NULL;
+    cout<<"El concepto de pago por consulta general tiene un valor de 14.800"<<endl;
+    cout<<"El concepto de pago por servicio de odontologia tiene un valor de 30.000"<<endl;
+    cout<<"El concepto de pago por re-consulta tiene un valor de 35.000"<<endl;
+    cout<<"Por favor digita el valor de tu pago por servicio prestado: "<<endl;
+    cin>>auxx->pag;
+    if((auxx->pag==valor1)||(auxx->pag==valor2)||(auxx->pag==valor3)){
+    if(raizz==NULL){
+    raizz=auxx;
+    auxx=NULL;
+    }else{auxx2=raizz;
+pocisionarconsulgen();}
+    }else{
+        cout<<"Error en el pago, su valor no es el indicado"<<endl;
+    }
+ return 0;   
+}
+int registrar_fecha(){
+aux=(struct paciente *)malloc (sizeof(struct paciente));
+aux->der=aux->izq=NULL;
+cout<<"Digita la fecha de nacimiento : ";
+cin>>aux->anho;
+if (raiz==NULL){
+raiz=aux;
+aux=NULL;
+free(aux);
+}else{aux2=raiz;
+pocisionar();
+}
+return 0;
+}
+int Ordenamiento(pagoconsul *recur){
+    cout<<"Valor cancelado :"<<recur->pag<<endl;
+    if(recur->pagiz!=NULL)
+    Ordenamiento(recur->pagiz);
+    if(recur->pagoder!=NULL)
+    Ordenamiento(recur->pagoder);
+    return 0;
+}
+int preorden(paciente *recursive){
+    cout<<"Anho :"<<recursive->anho<<endl;
+    if(recursive->izq!=NULL)
+    preorden(recursive->izq);
+    if(recursive->der!=NULL)
+    preorden(recursive->der);
+    return 0;
+}
+int pr1(paciente *rec){
+    cout<<rec->anho;
+    cout<<"  ";
+    if(rec->izq!=NULL)
+    pr1(rec->izq);
+    if(rec->der!=NULL)
+    pr1(rec->der);
+    return 0;
+}
+int pr2(pagoconsul *recur){
+cout<<recur->pag;
+    cout<<" ";
+    if(recur->pagiz!=NULL)
+    pr2(recur->pagiz);
+    if(recur->pagoder!=NULL)
+    pr2(recur->pagoder);
+    return 0;
+}
+int datosxpaciente(pagoconsul *recursive1,paciente *recursive2){
+cout<<"Cliente:        "<<recursive2->anho;
+cout<<"  ";
+if(recursive2->izq!=NULL)
+    pr1(recursive2->izq);
+    if(recursive2->der!=NULL)
+    pr1(recursive2->der);
+cout<<endl;
+cout<<"Pago Realizado: "<<recursive1->pag;
+cout<<" ";
+ if(recursive1->pagiz!=NULL)
+pr2(recursive1->pagiz);
+    if(recursive1->pagoder!=NULL)
+pr2(recursive1->pagoder);
+cout<<endl;
+return 0;
+}
+int recorridototal(){
+    auxx=raizz;
+    aux=raiz;
+    if((auxx!=NULL)&&(aux!=NULL)){
+        datosxpaciente(auxx,aux); 
+    }
+   return 0;
+}
+int recorrer_arbolpagcon(){
+auxx=raizz;
+    if (auxx!=NULL){
+        Ordenamiento(auxx);
+    }
+ return 0;  
+}
+int recorer_arbolfec(){
+aux=raiz;
+    if (aux!=NULL){
+        preorden(aux);
+    }
+ return 0;
+}
+int main(){
+   
+    int opc=0;    
+    do {
+        cout<<"Bienvenido a la base de datos del hospital San buenaventura"<<endl;
+        cout<<"¿Que Accion deseas realizar?"<<endl;
+        cout<<"1. Registrar pacientes por documentacion"<<endl;
+        cout<<"2. Registrar Pagos realizados"<<endl;
+        cout<<"3. Consultar pagos realizados"<<endl; 
+        cout<<"4. Consultar pagos realizados por pacientes"<<endl; 
+        cout<<"6. Consultar pasajeros registrados"<<endl;  
+        cout<<"8. Salir"<<endl;
+        cin>>opc;
+        switch (opc)
+        {
+            case 1: registrar_fecha();break;
+            case 2: registrar_pagoconsulta();break;
+            case 3: recorrer_arbolpagcon();break;
+            case 4: recorridototal();break;
+            case 5: ;break;
+            case 6: recorer_arbolfec();break;  
+            
+        }
+    }while(opc!=8);
+ return 0;   
+}
