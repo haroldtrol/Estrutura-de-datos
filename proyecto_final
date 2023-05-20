@@ -1,0 +1,161 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Atleta
+{
+    string nombre;
+    int numero;
+    float tiempoPromedio;
+    Atleta *izquierda;
+    Atleta *derecha;
+};
+void insertarAtleta(Atleta *&arbol, string, int, float);
+Atleta *nuevo_a(string, int, float);
+Atleta *arbol = NULL;
+void mostrar(Atleta *, string, int, float, int);
+void recorrerArbolInOrden(Atleta *arbol);
+
+Atleta *nuevo_a(string Nombre, int Nu, float tp)
+{
+    Atleta *nuevo_nodo = new Atleta();
+    nuevo_nodo->nombre = Nombre;
+    nuevo_nodo->numero = Nu;
+    nuevo_nodo->tiempoPromedio = tp;
+    nuevo_nodo->izquierda = NULL;
+    nuevo_nodo->derecha = NULL;
+
+    return nuevo_nodo;
+}
+
+void insertarAtleta(Atleta *&arbol, string Nombre, int Nu, float tp)
+{
+    if (arbol == NULL)
+    {
+        Atleta *nuevo_nodo = nuevo_a(Nombre, Nu, tp);
+        arbol = nuevo_nodo;
+    }
+    else
+    {
+        float raiz = arbol->tiempoPromedio;
+        if (tp < raiz)
+        {
+            insertarAtleta(arbol->izquierda, Nombre, Nu, tp);
+        }
+        else
+        {
+            insertarAtleta(arbol->derecha, Nombre, Nu, tp);
+        }
+    }
+}
+
+void mostrar(Atleta *arbol, int conta)
+{
+
+    if (arbol == NULL)
+    {
+        return;
+    }
+    else
+    {
+        mostrar(arbol->derecha, conta++);
+        for (int i = 0; i < conta; i++)
+        {
+            cout << "   ";
+        }
+        cout << arbol->tiempoPromedio << endl;
+        mostrar(arbol->izquierda, conta++);
+    }
+}
+
+void registra()
+{
+
+    int numero, vueltas;
+    string nombre;
+    float tiempoPromedio;
+    char continuar;
+    do
+    {
+        cout << "Ingrese el nombre del atleta: ";
+        cin >> nombre;
+
+        cout << "Ingrese el numero del atleta: ";
+        cin >> numero;
+
+        cout << "Ingrese el numero de vueltas: ";
+
+        cin >> vueltas;
+
+        if (vueltas < 2)
+        {
+            cout << "El atleta debe registrar al menos dos vueltas." << endl;
+            return;
+        }
+
+        double tiempoTotal = 0.0;
+        for (int j = 0; j < vueltas; ++j)
+        {
+            double tiempo;
+            cout << "Ingrese el tiempo de la vuelta " << (j + 1) << ": ";
+            cin >> tiempo;
+            tiempoTotal += tiempo;
+        }
+
+        tiempoPromedio = tiempoTotal / vueltas;
+        insertarAtleta(arbol, nombre, numero, tiempoPromedio);
+
+        cout << "¿Desea agregar otro atleta? (s/n): ";
+        cin >> continuar;
+    } while (continuar == 's' || continuar == 'S');
+
+    return;
+}
+
+void ordenarCorredores(Atleta *arbol)
+{
+    cout << "Corredores ordenados por promedio (de mayor a menor):" << endl;
+    recorrerArbolInOrden(arbol);
+}
+
+void recorrerArbolInOrden(Atleta *arbol)
+{
+    if (arbol == NULL)
+    {
+        return;
+    }
+
+    recorrerArbolInOrden(arbol->izquierda);
+
+    cout << "Nombre: " << arbol->nombre << ", Promedio: " << arbol->tiempoPromedio << endl;
+
+    recorrerArbolInOrden(arbol->derecha);
+}
+
+int main()
+{
+    int opcion = 0, conta = 0;
+
+    do
+    {
+        cout << endl
+             << endl
+             << "1. Registrar corredor" << endl;
+        cout << "2. Mostrar corredores" << endl;
+        cout << "3. Salir" << endl;
+        cin >> opcion;
+        switch (opcion)
+        {
+        case 1:
+            registra();
+            break;
+        case 2:
+            mostrar(arbol, conta);
+            break;
+        case 3:
+            ordenarCorredores(arbol);
+            break;
+        }
+    } while (opcion != 5);
+    return 0;
+}
